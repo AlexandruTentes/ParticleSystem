@@ -1,3 +1,5 @@
+#include <GLFW/glfw3.h>
+
 #include "ParticleSystem.h"
 
 using namespace ParticleSystem;

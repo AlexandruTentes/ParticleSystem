@@ -21,32 +21,32 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2E3D371D-6CEE-48D7-8022-530047B0D466}</ProjectGuid>
     <RootNamespace>ParticleSystem</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -82,11 +82,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\programming\visualCode\opengl_path\glew-2.2.0\include;D:\programming\visualCode\opengl_path\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\glfw\include;F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\GLEW\include;F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\Freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>D:\programming\visualCode\opengl_path\glew-2.2.0\lib\Release\x64;D:\programming\visualCode\opengl_path\freeglut\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\glfw\lib;F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\GLEW\lib;F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\Freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -110,24 +110,45 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\programming\visualCode\opengl_path\glew-2.2.0\include;D:\programming\visualCode\opengl_path\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\glfw\include;F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\GLEW\include;F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\Freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>D:\programming\visualCode\opengl_path\glew-2.2.0\lib\Release\x64;D:\programming\visualCode\opengl_path\freeglut\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\glfw\lib;F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\GLEW\lib;F:\Code\C++\Particle\ParticleSystem\ParticleSystem\Dependancies\Freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="lib\App.h" />
+    <ClInclude Include="lib\Display.h" />
     <ClInclude Include="lib\EntryPoint.h" />
+    <ClInclude Include="lib\Events.h" />
+    <ClInclude Include="lib\GlobalVariables.h" />
+    <ClInclude Include="lib\GUI.h" />
+    <ClInclude Include="lib\Macro.h" />
     <ClInclude Include="lib\Platform.h" />
     <ClInclude Include="lib\CompiledHeaders.h" />
+    <ClInclude Include="lib\thirdparty\imgui\imconfig.h" />
+    <ClInclude Include="lib\thirdparty\imgui\imgui.h" />
+    <ClInclude Include="lib\thirdparty\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="lib\thirdparty\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="lib\thirdparty\imgui\imgui_internal.h" />
+    <ClInclude Include="lib\thirdparty\imgui\imstb_rectpack.h" />
+    <ClInclude Include="lib\thirdparty\imgui\imstb_textedit.h" />
+    <ClInclude Include="lib\thirdparty\imgui\imstb_truetype.h" />
     <ClInclude Include="ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lib\thirdparty\imgui\imgui.cpp" />
+    <ClCompile Include="lib\thirdparty\imgui\imgui_demo.cpp" />
+    <ClCompile Include="lib\thirdparty\imgui\imgui_draw.cpp" />
+    <ClCompile Include="lib\thirdparty\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="lib\thirdparty\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="lib\thirdparty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\Display.cpp" />
+    <ClCompile Include="src\GUI.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
