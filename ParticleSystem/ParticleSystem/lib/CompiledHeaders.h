@@ -3,8 +3,17 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <functional>
+#include <fstream>
 
 #include "Macro.h"
+#include "thirdparty/glm/glm.hpp"
+#include "thirdparty/glm/gtc/type_ptr.hpp"
+#include "thirdparty/glm/gtc/matrix_transform.hpp"
+#include "thirdparty/glm/gtx/transform.hpp"
 
 #ifdef _WIN64
 	#define WINDOWS

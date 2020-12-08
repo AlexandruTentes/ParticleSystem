@@ -5,6 +5,13 @@
 #include "Platform.h"
 #include "Display.h"
 #include "GUI.h"
+#include "Shader.h"
+#include "Buffer/IndexBuffer.h"
+#include "Buffer/VertexBuffer.h"
+#include "Buffer/VertexBufferLayout.h"
+#include "VertexArray.h"
+#include "Type/Model.h"
+#include "ModelParser/Parser.h"
 
 namespace ParticleSystem
 {

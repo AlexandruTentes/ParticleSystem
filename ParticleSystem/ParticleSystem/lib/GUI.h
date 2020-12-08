@@ -9,6 +9,18 @@
 
 namespace ParticleSystem
 {
+	struct temporary_globals
+	{
+		SINGLETONIZE(temporary_globals)
+		temporary_globals() {};
+
+		float scale = 1.0f;
+		float rotation_x = 0.0f;
+		float rotation_y = 0.0f;
+		float rotation_z = 0.0f;
+		float translation[3] = { 0.0f, 0.0f, 0.0f };
+	};
+
 	class GUI
 	{
 	public:

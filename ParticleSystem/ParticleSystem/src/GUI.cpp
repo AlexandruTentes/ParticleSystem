@@ -21,8 +21,16 @@ namespace ParticleSystem
 
 		ImGui::NewFrame();
 
-		static bool show = true;
-		ImGui::ShowDemoWindow(& show);
+		//Begin the GUI implementation
+		ImGui::Begin(Global::get_instance().window_title);
+
+		ImGui::SliderFloat("Scale", &temporary_globals::get_instance().scale, 0, 1);
+		ImGui::SliderFloat("Rotation x", &temporary_globals::get_instance().rotation_x, 0, 360);
+		ImGui::SliderFloat("Rotation y", &temporary_globals::get_instance().rotation_y, 0, 360);
+		ImGui::SliderFloat("Rotation z", &temporary_globals::get_instance().rotation_z, 0, 360);
+		ImGui::SliderFloat3("Position", temporary_globals::get_instance().translation, -1.0, 1.0);
+
+		ImGui::End();
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

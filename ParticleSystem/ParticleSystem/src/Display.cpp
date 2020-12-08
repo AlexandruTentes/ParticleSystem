@@ -27,14 +27,17 @@ namespace ParticleSystem
 		glewInit();
 		gui.attach();
 	}
+
 	bool Display::running()
 	{
 		return !glfwWindowShouldClose(window);
 	}
+
 	void Display::vsync(bool const & flag)
 	{
 		glfwSwapInterval(flag);
 	}
+
 	Display::~Display()
 	{
 		glfwTerminate();

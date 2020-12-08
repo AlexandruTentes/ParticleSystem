@@ -13,5 +13,7 @@ namespace ParticleSystem
 		unsigned int window_width = 1200;
 		unsigned int window_height = 700;
 		const char * window_title = "Particle System";
+		const char* model_path = "Model";
+		const char* shader_path = "Shader";
 	};
 }
