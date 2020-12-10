@@ -15,7 +15,7 @@ namespace ParticleSystem
 		void bind();
 		void unbind() const;
 
-		~VertexBuffer();
+		virtual ~VertexBuffer();
 	private:
 		DynamicObject<Vertex> cache;
 	};

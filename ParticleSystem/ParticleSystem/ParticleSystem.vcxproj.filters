@@ -552,6 +552,15 @@
     <ClInclude Include="lib\VertexArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lib\FolderData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\ModelCollection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Display.cpp">
@@ -633,6 +642,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\VertexArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

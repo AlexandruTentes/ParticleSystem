@@ -103,9 +103,12 @@ namespace ParticleSystem
 		if (word == "f") read_index = 1;
 	}
 
-	void OBJParser::read_extension(std::string const & path)
+	void OBJParser::read_extension(std::string & path, std::string & model_name)
 	{
-		read(path, ascii_lookup, std::bind(& OBJParser::parse_extension, this, std::placeholders::_1), false, true, '#');
-		model.set(vertex, normal, texture, index);
+		if (!models.exists(model_name))
+		{
+			read(path, ascii_lookup, std::bind(&OBJParser::parse_extension, this, std::placeholders::_1), false, true, '#');
+			models.add(std::move(Model(vertex, normal, texture, index, model_name)));
+		}
 	}
 }

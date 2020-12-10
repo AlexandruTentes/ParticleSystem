@@ -2,6 +2,8 @@
 
 namespace ParticleSystem
 {
+	static ImVec4 color = ImVec4(114.0f / 255.0f, 144.0f / 255.0f, 154.0f / 255.0f, 200.0f / 255.0f);
+
 	void GUI::attach()
 	{
 		handler = glfwGetWin32Window(window);
@@ -9,6 +11,11 @@ namespace ParticleSystem
 		ImGui::StyleColorsDark();
 		ImGui_ImplWin32_Init(handler);
 		ImGui_ImplOpenGL3_Init("#version 410");
+
+		if (model != nullptr)
+			return;
+
+		model = new Renderer();
 	}
 
 	void GUI::update()
@@ -24,11 +31,25 @@ namespace ParticleSystem
 		//Begin the GUI implementation
 		ImGui::Begin(Global::get_instance().window_title);
 
-		ImGui::SliderFloat("Scale", &temporary_globals::get_instance().scale, 0, 1);
-		ImGui::SliderFloat("Rotation x", &temporary_globals::get_instance().rotation_x, 0, 360);
-		ImGui::SliderFloat("Rotation y", &temporary_globals::get_instance().rotation_y, 0, 360);
-		ImGui::SliderFloat("Rotation z", &temporary_globals::get_instance().rotation_z, 0, 360);
-		ImGui::SliderFloat3("Position", temporary_globals::get_instance().translation, -1.0, 1.0);
+		bool open_popup = false;
+		for (unsigned int i = 0; i < folder.files.get_size(); i++)
+		{
+			open_popup |= ImGui::Button(folder.files.get_one(i).file.c_str());
+			if (open_popup)
+			{
+				read_raw_model(folder.files.get_one(i));
+				model->render(models.get(i));
+				ImGui::OpenPopup((folder.files.get_one(i).file + " Transformation Matrix").c_str());
+			}
+			if (ImGui::BeginPopup((folder.files.get_one(i).file + " Transformation Matrix").c_str()))
+			{
+				ImGui::Text(folder.files.get_one(i).file.c_str());
+				model->draw(models.get(i));
+				models.get(i).GUI();
+
+				ImGui::EndPopup();
+			}
+		}
 
 		ImGui::End();
 
@@ -65,5 +86,6 @@ namespace ParticleSystem
 	{
 		ImGui_ImplWin32_Shutdown();
 		ImGui_ImplOpenGL3_DestroyDeviceObjects();
+		delete model;
 	}
 }

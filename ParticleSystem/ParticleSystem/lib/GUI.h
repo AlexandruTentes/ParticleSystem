@@ -2,10 +2,13 @@
 
 #include "CompiledHeaders.h"
 #include "GlobalVariables.h"
-
+#include "FolderData.h"
 #include "thirdparty/imgui/imgui.h"
 #include "thirdparty/imgui/imgui_impl_win32.h"
 #include "thirdparty/imgui/imgui_impl_opengl3.h"
+#include "ModelCollection.h"
+#include "ModelParser/Parser.h"
+#include "Renderer.h"
 
 namespace ParticleSystem
 {
@@ -15,10 +18,10 @@ namespace ParticleSystem
 		temporary_globals() {};
 
 		float scale = 1.0f;
-		float rotation_x = 0.0f;
-		float rotation_y = 0.0f;
-		float rotation_z = 0.0f;
+		float rotation[3] = {0.0f, 0.0f, 0.0f};
 		float translation[3] = { 0.0f, 0.0f, 0.0f };
+		float color[3] = {255.0f, 0.0f, 0.0f};
+		float opacity = 1.0f;
 	};
 
 	class GUI
@@ -41,5 +44,8 @@ namespace ParticleSystem
 		HWND handler = NULL;
 	private:
 		float prev_time = 0.0f;
+		FolderData& folder = FolderData::get_instance();
+		ModelCollection& models = ModelCollection::get_instance();
+		Renderer * model = nullptr;
 	};
 }

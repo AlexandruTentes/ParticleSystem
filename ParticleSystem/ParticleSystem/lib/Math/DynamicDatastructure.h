@@ -63,6 +63,15 @@ namespace ParticleSystem
 			size++;
 		};
 
+		bool has(T const& item)
+		{
+			for (unsigned int i = 0; i < size; i++)
+				if (data[i] == item)
+					return true;
+
+			return false;
+		}
+
 		void remove(unsigned int const & index)
 		{
 			if (index >= size)
@@ -88,7 +97,7 @@ namespace ParticleSystem
 
 		bool is_full() { return max_capacity == 0 ? false : size == max_capacity; };
 		bool is_empty() { return size == 0; };
-		T get_one(unsigned int const & index) { return data[index]; };
+		T & get_one(unsigned int const & index) { return data[index]; };
 		T * get_all() { return data; };
 		unsigned int get_size() { return size; };
 		unsigned int get_capacity() { return capacity; };

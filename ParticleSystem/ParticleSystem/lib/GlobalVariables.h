@@ -5,6 +5,17 @@
 
 namespace ParticleSystem
 {
+	static std::string model_extension[] =
+	{
+		".obj"
+	};
+
+	//===== Model file extension =====//
+	enum ModelExtension
+	{
+		OBJ
+	};
+
 	class Global
 	{
 	public:

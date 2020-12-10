@@ -6,6 +6,8 @@
 #include "Vertex.h"
 #include "Normal.h"
 #include "Texture.h"
+#include "../thirdparty/imgui/imgui.h"
+#include "../GlobalVariables.h"
 
 ///////////////////////////////////////
 //===== The mdoel datastructure =====//
@@ -13,19 +15,35 @@
 
 namespace ParticleSystem
 {
+	struct ModelTransfData
+	{
+		float scale = 1.0f;
+		float rotation[3] = { 0.0f, 0.0f, 0.0f };
+		float translation[3] = { 0.0f, 0.0f, 0.0f };
+		float color[3] = { 128.0f, 128.0f, 128.0f };
+		float opacity = 1.0f;
+	};
+
 	class Model
 	{
 	public:
 		Model();
-		Model(Vertex & vertex, Normal & normal, Texture & texture, Index & index);
-		void set(Vertex & vertex, Normal & normal, Texture & texture, Index & index);
+		Model(Vertex & vertex, Normal & normal, Texture & texture, Index & index, std::string const& model_name);
+		void set(Vertex & vertex, Normal & normal, Texture & texture, Index & index, std::string const& model_name);
 		void set(Model & model);
-
-		~Model();
+		void animate();
+		void GUI();
+		virtual ~Model() = default;
 	public:
 		Vertex vertex;
 		Normal normal;
 		Texture texture;
 		Index index;
+		std::string model_name;
+		ModelTransfData data;
+		unsigned int collection_index = 0;
+		bool rendered = false;
+		bool animation = false;
+		float degree = 0.0f;
 	};
 }

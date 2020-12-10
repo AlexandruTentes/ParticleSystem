@@ -5,6 +5,7 @@
 #include "../CompiledHeaders.h"
 #include "../Type/Model.h"
 #include "../Math/Strmanip.h"
+#include "../ModelCollection.h"
 
 namespace ParticleSystem
 {
@@ -20,7 +21,7 @@ namespace ParticleSystem
 		Normal normal;
 		Texture texture;
 		Index index;
-		Model model;
+		ModelCollection& models = ModelCollection::get_instance();
 
 		short unsigned int read_vertex = 0;
 		short unsigned int read_normal = 0;
@@ -43,7 +44,7 @@ namespace ParticleSystem
 
 		void parse_extension(std::string const& word);
 		void indexing(std::string const & word);
-		void read_extension(std::string const& path);
+		void read_extension(std::string & path, std::string  & model_name);
 
 		virtual ~OBJParser() = default;
 	};

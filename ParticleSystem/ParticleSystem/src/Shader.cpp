@@ -66,9 +66,9 @@ namespace ParticleSystem
 		}
 	}
 
-	void Shader::set_uniform4f(std::string name, float v0, float v1, float v2, float v3)
+	void Shader::set_uniform4f(std::string name, glm::vec4 const& col)
 	{
-		glUniform4f(get_uniform_location(name), v0, v1, v2, v3);
+		glUniform4f(get_uniform_location(name), col[0], col[1], col[2], col[3]);
 	}
 
 	void Shader::set_uniform_matrix4fv(std::string name, glm::mat4 const & mat)

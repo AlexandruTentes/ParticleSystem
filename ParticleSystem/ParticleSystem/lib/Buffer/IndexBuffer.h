@@ -15,7 +15,7 @@ namespace ParticleSystem
 		void bind();
 		void unbind() const;
 
-		~IndexBuffer();
+		virtual ~IndexBuffer();
 	private:
 		DynamicObject<Index> cache;
 	};
