@@ -77,7 +77,7 @@ namespace ParticleSystem
 					move(p.data.transform.translation[1], time * p.data.speed, p.data.velocity[1], p, true);
 					move(p.data.transform.translation[2], time * p.data.speed, p.data.velocity[2], p);
 
-					wiggle_time = 0.001f;
+					wiggle_time += 0.01f;
 				}
 				else
 				{
@@ -266,10 +266,10 @@ namespace ParticleSystem
 	void ParticlePhysics::init_particle_data()
 	{
 		ParticleData pd;
-		pd.transform.scale = 0.01f;
+		pd.transform.scale = 0.005f;
 		pd.color_speed = 200.0f;
 		pd.scale_speed = 0.5f;
-		pd.min_scale = 0.01;
+		pd.min_scale = 0.005;
 		pd.initial_size = 1.0f;
 		pd.variation_size = 3.0f;
 		pd.end_size = 0.0f;

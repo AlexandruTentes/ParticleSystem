@@ -15,7 +15,7 @@ namespace ParticleSystem
 		while (display.running())
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glClearColor(0.5, 0.25, 0.5, 1.0);
+			glClearColor(0.26, 0.28, 0.41, 1.0);
 
 			gui.update();
 
