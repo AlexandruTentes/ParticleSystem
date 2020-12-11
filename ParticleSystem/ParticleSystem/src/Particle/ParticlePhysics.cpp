@@ -42,10 +42,15 @@ namespace ParticleSystem
 					else if(!p.data.repeat_mode && p.data.is_on_ground)
 						p.life_remaining -= time;
 					
-					p.data.transform.scale -= p.data.is_variation_size ? (time * p.data.variation_size * p.data.scale_speed) : 0;
 					p.data.transform.color[0] = fade_color(p.data.transform.color[0], time * p.data.color_speed, p);
 					p.data.transform.color[1] = fade_color(p.data.transform.color[1], time * p.data.color_speed, p);
 					p.data.transform.color[2] = fade_color(p.data.transform.color[2], time * p.data.color_speed, p);
+
+					if (p.data.is_on_ground)
+					{
+						p.data.transform.scale -= p.data.is_variation_size ? (time * p.data.scale_speed) : 0;
+						p.data.transform.scale = p.data.transform.scale < p.data.min_scale ? p.data.min_scale : p.data.transform.scale;
+					}
 
 					if (p.data.is_on_ground)
 					{
@@ -77,7 +82,8 @@ namespace ParticleSystem
 					move(p.data.transform.translation[1], time * p.data.speed, p.data.velocity[1], p, true);
 					move(p.data.transform.translation[2], time * p.data.speed, p.data.velocity[2], p);
 
-					wiggle_time += 0.01f;
+					if(!p.data.tornado_mode)
+						wiggle_time += 0.001f;
 				}
 				else
 				{
@@ -272,7 +278,6 @@ namespace ParticleSystem
 		pd.min_scale = 0.005;
 		pd.initial_size = 1.0f;
 		pd.variation_size = 3.0f;
-		pd.end_size = 0.0f;
 		pd.acceleration = 0.06f;
 		pd.lifetime = 2.0f;
 		pd.min_color = 20;
@@ -296,6 +301,7 @@ namespace ParticleSystem
 		pd.color_picker_max[1] = 208;
 		pd.color_picker_max[2] = 212;
 		pd.rotation_speed = 1.0f;
+		pd.is_variation_size = false;
 
 		SystemData& sd = SystemData::get_instance();
 		sd.pd = pd;
