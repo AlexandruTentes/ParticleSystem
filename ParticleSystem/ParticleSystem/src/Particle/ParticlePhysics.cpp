@@ -11,15 +11,16 @@ namespace ParticleSystem
 		particle.data.velocity[0] += random(0, particle.data.velocity_max) / particle.data.snow_wiggle_speed - 
 			particle.data.velocity_max / (2 * particle.data.snow_wiggle_speed);
 		particle.data.velocity[1] += -random(0, particle.data.velocity_max);
-		particle.data.velocity[2] += random(0, particle.data.velocity_max) - particle.data.velocity_max / 2;
+		particle.data.velocity[2] += random(0, particle.data.velocity_max) / particle.data.snow_wiggle_speed -
+			particle.data.velocity_max / (2 * particle.data.snow_wiggle_speed);
 		particle.data.initial_size = particle_data.initial_size + particle_data.variation_size * (random(0, 5) / 10);
 		particle.data.is_alive = true;
 		particles.alive_no++;
 		particles.no++;
 		particle.life_remaining = particle_data.lifetime;
-		particle.data.transform.color[0] = random(31, 63);
-		particle.data.transform.color[1] = random(194, 208);
-		particle.data.transform.color[2] = random(207, 212);
+		particle.data.transform.color[0] = random(particle.data.color_picker_min[0] - 1, particle.data.color_picker_max[0]);
+		particle.data.transform.color[1] = random(particle.data.color_picker_min[1] - 1, particle.data.color_picker_max[1]);
+		particle.data.transform.color[2] = random(particle.data.color_picker_min[2] - 1, particle.data.color_picker_max[2]);
 		particle.data.transform.translation[0] = random(0, particle.data.snow_area_spawn[0]) - particle.data.snow_area_spawn[0] / 2;
 		particle.data.transform.translation[1] = particle.data.repeat_mode ? random(0, particle.data.snow_area_spawn[1]) : 0.95 / particle.data.snow_area_spawn[1];
 		particle.data.transform.translation[2] = random(0, particle.data.snow_area_spawn[2]) - particle.data.snow_area_spawn[2] / 2;
@@ -51,16 +52,26 @@ namespace ParticleSystem
 					{
 						p.data.transform.opacity -= time * p.data.opacity_speed;
 						p.data.velocity[0] /= p.data.ground_friction;
+						p.data.velocity[2] /= p.data.ground_friction;
 					}
 					
 					if(p.data.tornado_mode)
 						p.data.velocity[0] += ((random(0, 1) > 5 ? 1 : -1) * random(0, 1) / 10) * p.data.snow_wiggle_speed;
 
+					if (wiggle_time > time_to_wiggle)
+					{
+						wiggle_value = (random(0, 1) > 5 ? 1 : -1) * wiggle_value;
+						wiggle_time = 0.0f;
+					}
+
+					p.data.velocity[0] *= wiggle_value;
 					p.data.velocity[1] = -p.data.snow_fall_speed;
+					p.data.velocity[2] *= wiggle_value;
 					move(p.data.transform.translation[0], time * p.data.speed, p.data.velocity[0], p);
 					move(p.data.transform.translation[1], time * p.data.speed, p.data.velocity[1], p, true);
-					//p.data.transform.translation[1] += move(time * p.data.speed, p.data.velocity[1], p);
-					//p.data.transform.translation[2] += move(time * p.data.speed, p.data.velocity[2], p);
+					move(p.data.transform.translation[2], time * p.data.speed, p.data.velocity[2], p);
+
+					wiggle_time = 0.001f;
 				}
 				else
 				{
@@ -138,6 +149,8 @@ namespace ParticleSystem
 	void ParticlePhysics::GUI()
 	{
 		bool btn;
+		double current_time = glfwGetTime();
+		frames++;
 
 		//Begin the GUI implementation
 		ImGui::SliderFloat("Color Speed", &sd.pd.color_speed, 0, 500);
@@ -151,6 +164,8 @@ namespace ParticleSystem
 		ImGui::SliderFloat("Variation Size", &sd.pd.variation_size, 0, 10);
 		ImGui::SliderFloat("Min Color", &sd.pd.min_color, 10, 100);
 		ImGui::SliderFloat("Max Color", &sd.pd.max_color, 180, 230);
+		ImGui::SliderFloat3("Color Picker Min", sd.pd.color_picker_min, 1, 255);
+		ImGui::SliderFloat3("Color Picker Max", sd.pd.color_picker_max, 1, 255);
 		ImGui::SliderFloat("Max Velocity", &sd.pd.velocity_max, 1, 3);
 		ImGui::SliderFloat("Snow Fall", &sd.pd.snow_fall_speed, 0, 1);
 		ImGui::SliderFloat("Snow Wiggle", &sd.pd.snow_wiggle_speed, 10, 1);
@@ -160,6 +175,16 @@ namespace ParticleSystem
 
 		if (ImGui::Button("Reset Particle Data"))
 			init_particle_data();
+
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 1), ("FPS: " + fps).c_str());
+
+		if (current_time - prev_time >= 1.0)
+		{
+			fps = std::to_string(frames);
+			frames = 0;
+			prev_time += current_time;
+		}
 
 		ImGui::NewLine();
 
@@ -248,6 +273,12 @@ namespace ParticleSystem
 		pd.ground_friction = 1.1;
 		pd.repeat_mode = false;
 		pd.tornado_mode = false;
+		pd.color_picker_min[0] = 32;
+		pd.color_picker_min[1] = 195;
+		pd.color_picker_min[2] = 208;
+		pd.color_picker_max[0] = 63;
+		pd.color_picker_max[1] = 208;
+		pd.color_picker_max[2] = 212;
 
 		SystemData& sd = SystemData::get_instance();
 		sd.pd = pd;

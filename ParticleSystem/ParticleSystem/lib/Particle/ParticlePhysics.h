@@ -41,5 +41,11 @@ namespace ParticleSystem
 		SystemData& sd = SystemData::get_instance();
 		float snow_time = 0.0f;
 		float time_to_snow = 2.0f;
+		int wiggle_value = 1;
+		float wiggle_time = 0.0f;
+		float time_to_wiggle = 2.0f;
+		double prev_time = 0.0f;
+		int frames = 0;
+		std::string fps = "0";
 	};
 }

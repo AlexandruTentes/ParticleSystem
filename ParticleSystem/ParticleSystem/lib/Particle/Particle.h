@@ -12,6 +12,8 @@ namespace ParticleSystem
 		float min_scale;
 		float scale_speed;
 		float min_color, max_color;
+		float color_picker_min[3];
+		float color_picker_max[3];
 		float opacity_speed;
 		float color_speed;
 		float velocity_max;

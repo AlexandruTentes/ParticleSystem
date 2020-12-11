@@ -29,7 +29,7 @@ namespace ParticleSystem
 		ImGui::NewFrame();
 
 		//Begin the GUI implementation
-		ImGui::Begin(Global::get_instance().window_title);
+		ImGui::Begin("Rainbow Snow Flakes System");
 
 		bool open_popup = false;
 		for (unsigned int i = 0; i < folder.files.get_size(); i++)
@@ -44,7 +44,7 @@ namespace ParticleSystem
 			}
 			if (ImGui::BeginPopup("Rainbow Snow Flakes System"))
 			{
-				ImGui::Text(folder.files.get_one(i).file.c_str());
+				ImGui::Text("Rainbow Snow Flakes System");
 				ParticlePhysics p;
 				p.render(model, models.get(i));
 				//models.get(i).GUI();
