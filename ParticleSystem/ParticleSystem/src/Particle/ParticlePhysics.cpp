@@ -41,8 +41,7 @@ namespace ParticleSystem
 						p.life_remaining -= time;
 					else if(!p.data.repeat_mode && p.data.is_on_ground)
 						p.life_remaining -= time;
-
-					//p.rotation += 0.01f * time; 
+					
 					p.data.transform.scale -= p.data.is_variation_size ? (time * p.data.variation_size * p.data.scale_speed) : 0;
 					p.data.transform.color[0] = fade_color(p.data.transform.color[0], time * p.data.color_speed, p);
 					p.data.transform.color[1] = fade_color(p.data.transform.color[1], time * p.data.color_speed, p);
@@ -53,6 +52,13 @@ namespace ParticleSystem
 						p.data.transform.opacity -= time * p.data.opacity_speed;
 						p.data.velocity[0] /= p.data.ground_friction;
 						p.data.velocity[2] /= p.data.ground_friction;
+					}
+
+					if (!p.data.is_on_ground)
+					{
+						p.data.transform.rotation[0] += (random(0, 1) > 5 ? 1 : -1) * p.data.rotation_speed;
+						p.data.transform.rotation[1] += (random(0, 1) > 5 ? 1 : -1) * p.data.rotation_speed;
+						p.data.transform.rotation[2] += (random(0, 1) > 5 ? 1 : -1) * p.data.rotation_speed;
 					}
 					
 					if(p.data.tornado_mode)
@@ -109,6 +115,12 @@ namespace ParticleSystem
 				aux_model.data.translation[2] = p.data.transform.translation[2];
 				
 				aux_model.rendered = true;
+
+				r->view.set(sd.camera[0], sd.camera[1], sd.camera[2], 0,
+					0, 0, sd.camera_coord[0], 0,
+					0, sd.camera_coord[1], 0, 0,
+					0, 0, 0, 0);
+
 				r->draw(aux_model);
 			}
 		}
@@ -159,9 +171,9 @@ namespace ParticleSystem
 		ImGui::SliderFloat("Acceleration", &sd.pd.acceleration, 0, 1);
 		ImGui::SliderFloat("Lifetime", &sd.pd.lifetime, 0, 50);
 		ImGui::SliderFloat("Speed", &sd.pd.speed, 0, 500);
+		ImGui::SliderFloat("Rotation Speed", &sd.pd.rotation_speed, 0, 10);
 		ImGui::SliderFloat("Scale", &sd.pd.transform.scale, 0, 1);
 		ImGui::SliderFloat("Min Scale", &sd.pd.min_scale, 0, 1);
-		ImGui::SliderFloat("Variation Size", &sd.pd.variation_size, 0, 10);
 		ImGui::SliderFloat("Min Color", &sd.pd.min_color, 10, 100);
 		ImGui::SliderFloat("Max Color", &sd.pd.max_color, 180, 230);
 		ImGui::SliderFloat3("Color Picker Min", sd.pd.color_picker_min, 1, 255);
@@ -169,8 +181,10 @@ namespace ParticleSystem
 		ImGui::SliderFloat("Max Velocity", &sd.pd.velocity_max, 1, 3);
 		ImGui::SliderFloat("Snow Fall", &sd.pd.snow_fall_speed, 0, 1);
 		ImGui::SliderFloat("Snow Wiggle", &sd.pd.snow_wiggle_speed, 10, 1);
-		ImGui::SliderFloat3("Snow area spawn", sd.pd.snow_area_spawn, 1, 10);
+		ImGui::SliderFloat3("Snow area spawn", sd.pd.snow_area_spawn, -10, 10);
 		ImGui::SliderFloat("Ground Friction", &sd.pd.ground_friction, 1, 2);
+		ImGui::SliderFloat3("Camera", sd.camera, -10, 10);
+		ImGui::SliderFloat2("Camera Coord", sd.camera_coord, -1, 1);
 		ImGui::SliderInt("Particle Spawn", &sd.pd.particle_spawn, 0, 5000);
 
 		if (ImGui::Button("Reset Particle Data"))
@@ -178,6 +192,8 @@ namespace ParticleSystem
 
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(1, 1, 0, 1), ("FPS: " + fps).c_str());
+		ImGui::SameLine();
+		ImGui::Text(("Particles: " + std::to_string(particles.alive_no)).c_str());
 
 		if (current_time - prev_time >= 1.0)
 		{
@@ -264,7 +280,7 @@ namespace ParticleSystem
 		pd.speed = 35.0f;
 		pd.opacity_speed = 0.6f;
 		pd.velocity_max = 3.0f;
-		pd.particle_spawn = 15;
+		pd.particle_spawn = 10;
 		pd.snow_fall_speed = 0.5;
 		pd.snow_wiggle_speed = 10;
 		pd.snow_area_spawn[0] = 2;
@@ -279,8 +295,14 @@ namespace ParticleSystem
 		pd.color_picker_max[0] = 63;
 		pd.color_picker_max[1] = 208;
 		pd.color_picker_max[2] = 212;
+		pd.rotation_speed = 1.0f;
 
 		SystemData& sd = SystemData::get_instance();
 		sd.pd = pd;
+		sd.camera[0] = 0;
+		sd.camera[1] = 0;
+		sd.camera[2] = -3;
+		sd.camera_coord[0] = 1;
+		sd.camera_coord[1] = 1;
 	}
 }

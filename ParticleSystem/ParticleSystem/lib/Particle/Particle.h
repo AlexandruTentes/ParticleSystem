@@ -19,6 +19,7 @@ namespace ParticleSystem
 		float velocity_max;
 		float snow_fall_speed;
 		float snow_wiggle_speed;
+		float rotation_speed;
 		float snow_area_spawn[3];
 		float velocity[3] =
 		{

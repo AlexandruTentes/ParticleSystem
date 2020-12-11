@@ -13,6 +13,8 @@ namespace ParticleSystem
 		SINGLETONIZE(SystemData)
 		SystemData() {};
 		ParticleData pd;
+		float camera[3];
+		float camera_coord[2];
 	};
 
 	class ParticlePhysics

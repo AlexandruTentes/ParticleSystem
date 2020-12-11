@@ -18,7 +18,7 @@ namespace ParticleSystem
 		void draw(Model & m);
 
 		virtual ~Renderer() = default;
-	private:
+	public:
 		Matrix4d<float> view;
 		Shader shader;
 		VertexBuffer vb;
