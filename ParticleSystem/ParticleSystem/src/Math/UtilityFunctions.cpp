@@ -71,9 +71,9 @@ namespace ParticleSystem
 	float random(unsigned int a, unsigned int b)
 	{
 		float result = 0.0f;
+		float aux_a = a + 0.1;
 
-		srand((float)time(0));
-		result = a + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (b - a)));
+		result = aux_a + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (b - aux_a)));
 
 		return result;
 	}

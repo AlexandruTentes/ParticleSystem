@@ -16,6 +16,7 @@ namespace ParticleSystem
 		gui.window = window;
 		glfwMakeContextCurrent(window);
 
+		glfwSetFramebufferSizeCallback(window, glfw_resize_callback);
 		glfwSetCharCallback(window, glfw_char_callback);
 		glfwSetScrollCallback(window, glfw_scroll_callback);
 		glfwSetCursorPosCallback(window, glfw_mouse_callback);
@@ -25,6 +26,10 @@ namespace ParticleSystem
 		vsync(true);
 
 		glewInit();
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		gui.attach();
 	}
 

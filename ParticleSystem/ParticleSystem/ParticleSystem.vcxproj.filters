@@ -501,9 +501,6 @@
     <ClInclude Include="lib\thirdparty\glm\vector_relational.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Particle\ParticleSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="lib\Buffer\IndexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -561,6 +558,9 @@
     <ClInclude Include="lib\ModelCollection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lib\Particle\ParticlePhysics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Display.cpp">
@@ -594,9 +594,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lib\thirdparty\glm\detail\glm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Particle\ParticleSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Buffer\IndexBuffer.cpp">
@@ -645,6 +642,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particle\ParticlePhysics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

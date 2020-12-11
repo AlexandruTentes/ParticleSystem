@@ -12,7 +12,7 @@ namespace ParticleSystem
 		ParticleCollection();
 		virtual ~ParticleCollection() = default;
 	public:
-		unsigned int capacity = 2500;
+		unsigned int capacity = 100000;
 		unsigned int current_index = capacity - 1;
 
 		std::vector<Particle> particle_array;

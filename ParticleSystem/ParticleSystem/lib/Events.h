@@ -35,4 +35,9 @@ namespace ParticleSystem
 	{
 		GUI::get_instance().text_event(codepoint);
 	}
+
+	static void glfw_resize_callback(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
+	}
 }

@@ -34,18 +34,27 @@ namespace ParticleSystem
 		bool open_popup = false;
 		for (unsigned int i = 0; i < folder.files.get_size(); i++)
 		{
-			open_popup |= ImGui::Button(folder.files.get_one(i).file.c_str());
+			open_popup |= ImGui::Button("Rainbow Snow Flakes System");
 			if (open_popup)
 			{
 				read_raw_model(folder.files.get_one(i));
 				model->render(models.get(i));
-				ImGui::OpenPopup((folder.files.get_one(i).file + " Transformation Matrix").c_str());
+				particle.kill_all();
+				ImGui::OpenPopup("Rainbow Snow Flakes System");
 			}
-			if (ImGui::BeginPopup((folder.files.get_one(i).file + " Transformation Matrix").c_str()))
+			if (ImGui::BeginPopup("Rainbow Snow Flakes System"))
 			{
 				ImGui::Text(folder.files.get_one(i).file.c_str());
-				model->draw(models.get(i));
-				models.get(i).GUI();
+				ParticlePhysics p;
+				p.render(model, models.get(i));
+				//models.get(i).GUI();
+				particle.GUI();
+
+				if (sd.pd.repeat_mode && particle.particles.alive_no == 0)
+					for (unsigned int i = 0; i < sd.pd.particle_spawn; i++)
+						particle.emit(sd.pd);
+				else if (!sd.pd.repeat_mode)
+					particle.snow(sd.pd);	
 
 				ImGui::EndPopup();
 			}

@@ -140,7 +140,7 @@
     <ClInclude Include="lib\ModelParser\Parser.h" />
     <ClInclude Include="lib\Particle\Particle.h" />
     <ClInclude Include="lib\Particle\ParticleCollection.h" />
-    <ClInclude Include="lib\Particle\ParticleSystem.h" />
+    <ClInclude Include="lib\Particle\ParticlePhysics.h" />
     <ClInclude Include="lib\Platform.h" />
     <ClInclude Include="lib\CompiledHeaders.h" />
     <ClInclude Include="lib\Renderer.h" />
@@ -323,7 +323,7 @@
     <ClCompile Include="src\ModelParser\OBJParser.cpp" />
     <ClCompile Include="src\ModelParser\Parser.cpp" />
     <ClCompile Include="src\Particle\ParticleCollection.cpp" />
-    <ClCompile Include="src\Particle\ParticleSystem.cpp" />
+    <ClCompile Include="src\Particle\ParticlePhysics.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Type\Index.cpp" />

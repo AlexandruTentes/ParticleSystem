@@ -4,9 +4,13 @@ namespace ParticleSystem
 {
 	void App::run()
 	{
+		srand((float)time(NULL));
+
 		DynamicObject<FileAndPath> files;
 		get_files_directory(files, std::string(Global::get_instance().model_path), model_extension, sizeof(model_extension) / sizeof(model_extension[0]));
 		FolderData::get_instance().files = files;
+
+		ParticlePhysics::init_particle_data();
 
 		while (display.running())
 		{

@@ -8,6 +8,7 @@
 #include "thirdparty/imgui/imgui_impl_opengl3.h"
 #include "ModelCollection.h"
 #include "ModelParser/Parser.h"
+#include "Particle/ParticlePhysics.h"
 #include "Renderer.h"
 
 namespace ParticleSystem
@@ -47,5 +48,7 @@ namespace ParticleSystem
 		FolderData& folder = FolderData::get_instance();
 		ModelCollection& models = ModelCollection::get_instance();
 		Renderer * model = nullptr;
+		ParticlePhysics particle;
+		SystemData& sd = SystemData::get_instance();
 	};
 }
